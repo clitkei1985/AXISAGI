@@ -1,0 +1,2187 @@
+{
+  "timestamp": "2025-06-04T11:03:27.615943",
+  "total_files_analyzed": 242,
+  "files_needing_refactoring": 24,
+  "total_lines_analyzed": 7297,
+  "files": [
+    {
+      "path": "./modules/web_search/engine.py",
+      "lines": 562,
+      "analysis": {
+        "imports": [
+          "asyncio",
+          "aiohttp",
+          "logging",
+          "typing",
+          "urllib.parse",
+          "bs4",
+          "re",
+          "json",
+          "datetime",
+          "pathlib",
+          "core.config"
+        ],
+        "classes": [
+          {
+            "name": "WebSearchEngine",
+            "lineno": 16,
+            "end_lineno": 552,
+            "methods": [
+              "__init__",
+              "_extract_main_content",
+              "_extract_links",
+              "_extract_images",
+              "_extract_structured_data",
+              "_is_research_paper",
+              "_extract_factual_claims",
+              "_classify_content",
+              "_calculate_credibility_score",
+              "_is_academic_source",
+              "_evaluate_objective_fulfillment",
+              "_find_relevant_links"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 14
+          },
+          {
+            "name": "_web_search_engine",
+            "lineno": 555
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "high"
+    },
+    {
+      "path": "./modules/analytics_reporting/reports.py",
+      "lines": 544,
+      "analysis": {
+        "imports": [
+          "typing",
+          "datetime",
+          "sqlalchemy.orm",
+          "sqlalchemy",
+          "core.database",
+          "utils",
+          "json",
+          "logging"
+        ],
+        "classes": [
+          {
+            "name": "ReportGenerator",
+            "lineno": 12,
+            "end_lineno": 544,
+            "methods": [
+              "__init__",
+              "_categorize_audit_events",
+              "_categorize_sessions"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 10
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "high"
+    },
+    {
+      "path": "./modules/plugin_system/manager.py",
+      "lines": 382,
+      "analysis": {
+        "imports": [
+          "os",
+          "sys",
+          "importlib",
+          "inspect",
+          "asyncio",
+          "typing",
+          "pathlib",
+          "logging",
+          "datetime",
+          "json",
+          "abc",
+          "core.config",
+          "core.database"
+        ],
+        "classes": [
+          {
+            "name": "PluginInterface",
+            "lineno": 18,
+            "end_lineno": 66,
+            "methods": [
+              "name",
+              "version",
+              "description",
+              "author",
+              "get_available_actions",
+              "get_config_schema"
+            ]
+          },
+          {
+            "name": "PluginMetadata",
+            "lineno": 68,
+            "end_lineno": 79,
+            "methods": [
+              "__init__"
+            ]
+          },
+          {
+            "name": "PluginManager",
+            "lineno": 81,
+            "end_lineno": 355,
+            "methods": [
+              "__init__",
+              "register_hook",
+              "get_plugin_info",
+              "list_plugins"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_plugin_manager",
+            "lineno": 360,
+            "end_lineno": 365
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 16
+          },
+          {
+            "name": "_plugin_manager",
+            "lineno": 358
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "class_split",
+          "name": "plugininterface.py",
+          "content": "Extract PluginInterface class",
+          "line_range": [
+            18,
+            66
+          ],
+          "includes": [
+            "PluginInterface"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "pluginmetadata.py",
+          "content": "Extract PluginMetadata class",
+          "line_range": [
+            68,
+            79
+          ],
+          "includes": [
+            "PluginMetadata"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "pluginmanager.py",
+          "content": "Extract PluginManager class",
+          "line_range": [
+            81,
+            355
+          ],
+          "includes": [
+            "PluginManager"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./modules/memory/memory_manager.py",
+      "lines": 374,
+      "analysis": {
+        "imports": [
+          "numpy",
+          "typing",
+          "datetime",
+          "json",
+          "base64",
+          "sqlalchemy.orm",
+          "faiss",
+          "sentence_transformers",
+          "core.config",
+          "core.database",
+          "core.security",
+          "logging",
+          "os",
+          "pickle",
+          "pathlib",
+          "torch"
+        ],
+        "classes": [
+          {
+            "name": "MemoryManager",
+            "lineno": 20,
+            "end_lineno": 340,
+            "methods": [
+              "__init__",
+              "_load_or_create_index",
+              "_save_index",
+              "_load_existing_memories",
+              "add_memory",
+              "search_memories",
+              "update_memory",
+              "delete_memory",
+              "cleanup_old_memories",
+              "export_memories",
+              "import_memories"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_memory_manager",
+            "lineno": 345,
+            "end_lineno": 350
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 18
+          },
+          {
+            "name": "_memory_manager",
+            "lineno": 343
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./interfaces/admin/api_management.py",
+      "lines": 357,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "sqlalchemy.orm",
+          "typing",
+          "datetime",
+          "secrets",
+          "hashlib",
+          "logging",
+          "core.database",
+          "core.security",
+          "schemas",
+          "modules.memory.memory_manager",
+          "modules.llm_engine.engine",
+          "modules.plugin_system.manager",
+          "modules.audio_voice.processor",
+          "modules.image_module.processor"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 19
+          },
+          {
+            "name": "router",
+            "lineno": 20
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./modules/code_analysis/auto_refactor.py",
+      "lines": 349,
+      "analysis": {
+        "imports": [
+          "os",
+          "ast",
+          "logging",
+          "typing",
+          "pathlib",
+          "datetime",
+          "subprocess",
+          "shutil"
+        ],
+        "classes": [
+          {
+            "name": "AutoRefactor",
+            "lineno": 11,
+            "end_lineno": 344,
+            "methods": [
+              "__init__",
+              "find_large_files",
+              "analyze_file_structure",
+              "suggest_refactoring",
+              "_group_methods_by_functionality",
+              "_group_functions_by_functionality",
+              "create_backup",
+              "generate_refactoring_report",
+              "_calculate_priority",
+              "auto_refactor_file",
+              "run_refactoring_scan"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_auto_refactor",
+            "lineno": 347,
+            "end_lineno": 349
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 9
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./interfaces/admin/schemas.py",
+      "lines": 337,
+      "analysis": {
+        "imports": [
+          "pydantic",
+          "typing",
+          "datetime"
+        ],
+        "classes": [
+          {
+            "name": "SystemStatus",
+            "lineno": 7,
+            "end_lineno": 17,
+            "methods": []
+          },
+          {
+            "name": "SystemConfig",
+            "lineno": 19,
+            "end_lineno": 27,
+            "methods": []
+          },
+          {
+            "name": "SystemConfigUpdate",
+            "lineno": 29,
+            "end_lineno": 37,
+            "methods": []
+          },
+          {
+            "name": "UserInfo",
+            "lineno": 41,
+            "end_lineno": 51,
+            "methods": []
+          },
+          {
+            "name": "UserCreate",
+            "lineno": 53,
+            "end_lineno": 57,
+            "methods": []
+          },
+          {
+            "name": "UserUpdate",
+            "lineno": 59,
+            "end_lineno": 63,
+            "methods": []
+          },
+          {
+            "name": "BulkUserAction",
+            "lineno": 65,
+            "end_lineno": 68,
+            "methods": []
+          },
+          {
+            "name": "DatabaseStats",
+            "lineno": 72,
+            "end_lineno": 81,
+            "methods": []
+          },
+          {
+            "name": "BackupInfo",
+            "lineno": 83,
+            "end_lineno": 89,
+            "methods": []
+          },
+          {
+            "name": "BackupRequest",
+            "lineno": 91,
+            "end_lineno": 94,
+            "methods": []
+          },
+          {
+            "name": "RestoreRequest",
+            "lineno": 96,
+            "end_lineno": 99,
+            "methods": []
+          },
+          {
+            "name": "PluginInfo",
+            "lineno": 103,
+            "end_lineno": 114,
+            "methods": []
+          },
+          {
+            "name": "PluginInstallRequest",
+            "lineno": 116,
+            "end_lineno": 119,
+            "methods": []
+          },
+          {
+            "name": "PluginConfigUpdate",
+            "lineno": 121,
+            "end_lineno": 124,
+            "methods": []
+          },
+          {
+            "name": "LogEntry",
+            "lineno": 128,
+            "end_lineno": 136,
+            "methods": []
+          },
+          {
+            "name": "LogQuery",
+            "lineno": 138,
+            "end_lineno": 146,
+            "methods": []
+          },
+          {
+            "name": "LogStats",
+            "lineno": 148,
+            "end_lineno": 153,
+            "methods": []
+          },
+          {
+            "name": "AlertRule",
+            "lineno": 157,
+            "end_lineno": 165,
+            "methods": []
+          },
+          {
+            "name": "Alert",
+            "lineno": 167,
+            "end_lineno": 176,
+            "methods": []
+          },
+          {
+            "name": "MetricValue",
+            "lineno": 178,
+            "end_lineno": 183,
+            "methods": []
+          },
+          {
+            "name": "SystemHealth",
+            "lineno": 185,
+            "end_lineno": 190,
+            "methods": []
+          },
+          {
+            "name": "MaintenanceWindow",
+            "lineno": 194,
+            "end_lineno": 202,
+            "methods": []
+          },
+          {
+            "name": "MaintenanceTask",
+            "lineno": 204,
+            "end_lineno": 213,
+            "methods": []
+          },
+          {
+            "name": "SecurityEvent",
+            "lineno": 217,
+            "end_lineno": 226,
+            "methods": []
+          },
+          {
+            "name": "SecurityRule",
+            "lineno": 228,
+            "end_lineno": 235,
+            "methods": []
+          },
+          {
+            "name": "SecurityAudit",
+            "lineno": 237,
+            "end_lineno": 244,
+            "methods": []
+          },
+          {
+            "name": "AuditLogEntry",
+            "lineno": 248,
+            "end_lineno": 258,
+            "methods": []
+          },
+          {
+            "name": "AuditQuery",
+            "lineno": 260,
+            "end_lineno": 267,
+            "methods": []
+          },
+          {
+            "name": "PerformanceMetrics",
+            "lineno": 271,
+            "end_lineno": 277,
+            "methods": []
+          },
+          {
+            "name": "PerformanceReport",
+            "lineno": 279,
+            "end_lineno": 287,
+            "methods": []
+          },
+          {
+            "name": "APIEndpoint",
+            "lineno": 291,
+            "end_lineno": 299,
+            "methods": []
+          },
+          {
+            "name": "APIKey",
+            "lineno": 301,
+            "end_lineno": 310,
+            "methods": []
+          },
+          {
+            "name": "APIKeyCreate",
+            "lineno": 312,
+            "end_lineno": 316,
+            "methods": []
+          },
+          {
+            "name": "AdminActionResult",
+            "lineno": 320,
+            "end_lineno": 324,
+            "methods": []
+          },
+          {
+            "name": "PaginatedResponse",
+            "lineno": 326,
+            "end_lineno": 331,
+            "methods": []
+          },
+          {
+            "name": "HealthCheckResponse",
+            "lineno": 333,
+            "end_lineno": 337,
+            "methods": []
+          }
+        ],
+        "functions": [],
+        "constants": [],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "class_split",
+          "name": "systemstatus.py",
+          "content": "Extract SystemStatus class",
+          "line_range": [
+            7,
+            17
+          ],
+          "includes": [
+            "SystemStatus"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "systemconfig.py",
+          "content": "Extract SystemConfig class",
+          "line_range": [
+            19,
+            27
+          ],
+          "includes": [
+            "SystemConfig"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "systemconfigupdate.py",
+          "content": "Extract SystemConfigUpdate class",
+          "line_range": [
+            29,
+            37
+          ],
+          "includes": [
+            "SystemConfigUpdate"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "userinfo.py",
+          "content": "Extract UserInfo class",
+          "line_range": [
+            41,
+            51
+          ],
+          "includes": [
+            "UserInfo"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "usercreate.py",
+          "content": "Extract UserCreate class",
+          "line_range": [
+            53,
+            57
+          ],
+          "includes": [
+            "UserCreate"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "userupdate.py",
+          "content": "Extract UserUpdate class",
+          "line_range": [
+            59,
+            63
+          ],
+          "includes": [
+            "UserUpdate"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "bulkuseraction.py",
+          "content": "Extract BulkUserAction class",
+          "line_range": [
+            65,
+            68
+          ],
+          "includes": [
+            "BulkUserAction"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "databasestats.py",
+          "content": "Extract DatabaseStats class",
+          "line_range": [
+            72,
+            81
+          ],
+          "includes": [
+            "DatabaseStats"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "backupinfo.py",
+          "content": "Extract BackupInfo class",
+          "line_range": [
+            83,
+            89
+          ],
+          "includes": [
+            "BackupInfo"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "backuprequest.py",
+          "content": "Extract BackupRequest class",
+          "line_range": [
+            91,
+            94
+          ],
+          "includes": [
+            "BackupRequest"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "restorerequest.py",
+          "content": "Extract RestoreRequest class",
+          "line_range": [
+            96,
+            99
+          ],
+          "includes": [
+            "RestoreRequest"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "plugininfo.py",
+          "content": "Extract PluginInfo class",
+          "line_range": [
+            103,
+            114
+          ],
+          "includes": [
+            "PluginInfo"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "plugininstallrequest.py",
+          "content": "Extract PluginInstallRequest class",
+          "line_range": [
+            116,
+            119
+          ],
+          "includes": [
+            "PluginInstallRequest"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "pluginconfigupdate.py",
+          "content": "Extract PluginConfigUpdate class",
+          "line_range": [
+            121,
+            124
+          ],
+          "includes": [
+            "PluginConfigUpdate"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "logentry.py",
+          "content": "Extract LogEntry class",
+          "line_range": [
+            128,
+            136
+          ],
+          "includes": [
+            "LogEntry"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "logquery.py",
+          "content": "Extract LogQuery class",
+          "line_range": [
+            138,
+            146
+          ],
+          "includes": [
+            "LogQuery"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "logstats.py",
+          "content": "Extract LogStats class",
+          "line_range": [
+            148,
+            153
+          ],
+          "includes": [
+            "LogStats"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "alertrule.py",
+          "content": "Extract AlertRule class",
+          "line_range": [
+            157,
+            165
+          ],
+          "includes": [
+            "AlertRule"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "alert.py",
+          "content": "Extract Alert class",
+          "line_range": [
+            167,
+            176
+          ],
+          "includes": [
+            "Alert"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "metricvalue.py",
+          "content": "Extract MetricValue class",
+          "line_range": [
+            178,
+            183
+          ],
+          "includes": [
+            "MetricValue"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "systemhealth.py",
+          "content": "Extract SystemHealth class",
+          "line_range": [
+            185,
+            190
+          ],
+          "includes": [
+            "SystemHealth"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "maintenancewindow.py",
+          "content": "Extract MaintenanceWindow class",
+          "line_range": [
+            194,
+            202
+          ],
+          "includes": [
+            "MaintenanceWindow"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "maintenancetask.py",
+          "content": "Extract MaintenanceTask class",
+          "line_range": [
+            204,
+            213
+          ],
+          "includes": [
+            "MaintenanceTask"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "securityevent.py",
+          "content": "Extract SecurityEvent class",
+          "line_range": [
+            217,
+            226
+          ],
+          "includes": [
+            "SecurityEvent"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "securityrule.py",
+          "content": "Extract SecurityRule class",
+          "line_range": [
+            228,
+            235
+          ],
+          "includes": [
+            "SecurityRule"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "securityaudit.py",
+          "content": "Extract SecurityAudit class",
+          "line_range": [
+            237,
+            244
+          ],
+          "includes": [
+            "SecurityAudit"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "auditlogentry.py",
+          "content": "Extract AuditLogEntry class",
+          "line_range": [
+            248,
+            258
+          ],
+          "includes": [
+            "AuditLogEntry"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "auditquery.py",
+          "content": "Extract AuditQuery class",
+          "line_range": [
+            260,
+            267
+          ],
+          "includes": [
+            "AuditQuery"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "performancemetrics.py",
+          "content": "Extract PerformanceMetrics class",
+          "line_range": [
+            271,
+            277
+          ],
+          "includes": [
+            "PerformanceMetrics"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "performancereport.py",
+          "content": "Extract PerformanceReport class",
+          "line_range": [
+            279,
+            287
+          ],
+          "includes": [
+            "PerformanceReport"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "apiendpoint.py",
+          "content": "Extract APIEndpoint class",
+          "line_range": [
+            291,
+            299
+          ],
+          "includes": [
+            "APIEndpoint"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "apikey.py",
+          "content": "Extract APIKey class",
+          "line_range": [
+            301,
+            310
+          ],
+          "includes": [
+            "APIKey"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "apikeycreate.py",
+          "content": "Extract APIKeyCreate class",
+          "line_range": [
+            312,
+            316
+          ],
+          "includes": [
+            "APIKeyCreate"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "adminactionresult.py",
+          "content": "Extract AdminActionResult class",
+          "line_range": [
+            320,
+            324
+          ],
+          "includes": [
+            "AdminActionResult"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "paginatedresponse.py",
+          "content": "Extract PaginatedResponse class",
+          "line_range": [
+            326,
+            331
+          ],
+          "includes": [
+            "PaginatedResponse"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "healthcheckresponse.py",
+          "content": "Extract HealthCheckResponse class",
+          "line_range": [
+            333,
+            337
+          ],
+          "includes": [
+            "HealthCheckResponse"
+          ]
+        }
+      ],
+      "priority": "high"
+    },
+    {
+      "path": "./interfaces/admin/users.py",
+      "lines": 320,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "sqlalchemy.orm",
+          "typing",
+          "datetime",
+          "secrets",
+          "logging",
+          "core.database",
+          "core.security",
+          "schemas"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 19
+          },
+          {
+            "name": "router",
+            "lineno": 20
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./interfaces/admin/database.py",
+      "lines": 301,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "sqlalchemy.orm",
+          "typing",
+          "datetime",
+          "os",
+          "json",
+          "logging",
+          "pathlib",
+          "gzip",
+          "core.database",
+          "core.security",
+          "schemas"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 21
+          },
+          {
+            "name": "router",
+            "lineno": 22
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./modules/llm_engine/memory_integration.py",
+      "lines": 289,
+      "analysis": {
+        "imports": [
+          "typing",
+          "logging",
+          "sqlalchemy.orm",
+          "core.database",
+          "modules.memory.memory_manager",
+          "sqlalchemy",
+          "core.database",
+          "collections",
+          "core.database",
+          "sqlalchemy",
+          "datetime"
+        ],
+        "classes": [
+          {
+            "name": "MemoryIntegration",
+            "lineno": 10,
+            "end_lineno": 289,
+            "methods": [
+              "__init__",
+              "enable_memory",
+              "disable_memory",
+              "is_memory_enabled"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 8
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/llm_engine/statistics.py",
+      "lines": 282,
+      "analysis": {
+        "imports": [
+          "typing",
+          "time",
+          "datetime",
+          "logging",
+          "schemas"
+        ],
+        "classes": [
+          {
+            "name": "LLMStatistics",
+            "lineno": 9,
+            "end_lineno": 282,
+            "methods": [
+              "__init__",
+              "update_stats",
+              "get_stats",
+              "get_detailed_stats",
+              "_format_model_usage",
+              "_calculate_requests_per_hour",
+              "_calculate_tokens_per_second",
+              "_get_recent_activity",
+              "_get_performance_trends",
+              "reset_stats",
+              "cleanup_old_stats",
+              "export_stats",
+              "import_stats"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 7
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/analytics_reporting/user.py",
+      "lines": 280,
+      "analysis": {
+        "imports": [
+          "typing",
+          "datetime",
+          "sqlalchemy.orm",
+          "sqlalchemy",
+          "core.database",
+          "utils",
+          "logging"
+        ],
+        "classes": [
+          {
+            "name": "UserAnalytics",
+            "lineno": 11,
+            "end_lineno": 280,
+            "methods": [
+              "__init__",
+              "analyze_user_activity",
+              "analyze_usage_patterns",
+              "analyze_memory_usage",
+              "analyze_behavior_patterns",
+              "_get_most_active_hours",
+              "_calculate_activity_consistency",
+              "_analyze_communication_style",
+              "_calculate_usage_consistency",
+              "_calculate_memory_growth_rate",
+              "_categorize_memories",
+              "_classify_user_type",
+              "_analyze_learning_pattern",
+              "_analyze_interaction_style",
+              "_analyze_feature_usage"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 9
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/analytics_reporting/chat.py",
+      "lines": 280,
+      "analysis": {
+        "imports": [
+          "typing",
+          "datetime",
+          "sqlalchemy.orm",
+          "core.database",
+          "utils",
+          "logging"
+        ],
+        "classes": [
+          {
+            "name": "ChatAnalytics",
+            "lineno": 10,
+            "end_lineno": 280,
+            "methods": [
+              "__init__",
+              "_calculate_session_duration",
+              "_calculate_message_frequency",
+              "_analyze_conversation_flow",
+              "_extract_topics",
+              "_analyze_sentiment_trends",
+              "_analyze_interaction_patterns",
+              "_identify_conversation_phases",
+              "_classify_flow_pattern",
+              "_calculate_conversation_engagement",
+              "_classify_interaction_style",
+              "_calculate_conversation_depth",
+              "_calculate_follow_up_ratio"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 8
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./core/security.py",
+      "lines": 273,
+      "analysis": {
+        "imports": [
+          "security.auth",
+          "security.roles",
+          "security.encryption",
+          "security.checksum",
+          "security.backup",
+          "security.logger",
+          "os",
+          "logging",
+          "hashlib",
+          "cryptography.fernet",
+          "datetime",
+          "typing",
+          "jose",
+          "passlib.context",
+          "fastapi",
+          "fastapi.security",
+          "sqlalchemy.orm",
+          "core.config",
+          "core.database",
+          "secrets",
+          "datetime"
+        ],
+        "classes": [
+          {
+            "name": "RoleChecker",
+            "lineno": 167,
+            "end_lineno": 178,
+            "methods": [
+              "__init__",
+              "__call__"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "verify_password",
+            "lineno": 39,
+            "end_lineno": 41
+          },
+          {
+            "name": "get_password_hash",
+            "lineno": 43,
+            "end_lineno": 45
+          },
+          {
+            "name": "create_access_token",
+            "lineno": 47,
+            "end_lineno": 61
+          },
+          {
+            "name": "create_refresh_token",
+            "lineno": 63,
+            "end_lineno": 73
+          },
+          {
+            "name": "validate_password",
+            "lineno": 123,
+            "end_lineno": 148
+          },
+          {
+            "name": "generate_secret_key",
+            "lineno": 150,
+            "end_lineno": 152
+          },
+          {
+            "name": "encrypt_sensitive_data",
+            "lineno": 154,
+            "end_lineno": 158
+          },
+          {
+            "name": "decrypt_sensitive_data",
+            "lineno": 160,
+            "end_lineno": 164
+          },
+          {
+            "name": "encrypt_data",
+            "lineno": 184,
+            "end_lineno": 194
+          },
+          {
+            "name": "decrypt_data",
+            "lineno": 196,
+            "end_lineno": 206
+          },
+          {
+            "name": "compute_checksum",
+            "lineno": 208,
+            "end_lineno": 222
+          },
+          {
+            "name": "verify_checksum",
+            "lineno": 224,
+            "end_lineno": 240
+          },
+          {
+            "name": "backup_memory_index",
+            "lineno": 242,
+            "end_lineno": 273
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 23
+          },
+          {
+            "name": "fh",
+            "lineno": 25
+          },
+          {
+            "name": "FERNET_KEY",
+            "lineno": 30
+          },
+          {
+            "name": "_f",
+            "lineno": 31
+          },
+          {
+            "name": "pwd_context",
+            "lineno": 34
+          },
+          {
+            "name": "oauth2_scheme",
+            "lineno": 37
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "medium"
+    },
+    {
+      "path": "./interfaces/admin/audit.py",
+      "lines": 270,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "fastapi.responses",
+          "sqlalchemy.orm",
+          "datetime",
+          "logging",
+          "core.database",
+          "core.security",
+          "schemas",
+          "time",
+          "csv",
+          "io"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 16
+          },
+          {
+            "name": "router",
+            "lineno": 17
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/performance/monitor.py",
+      "lines": 264,
+      "analysis": {
+        "imports": [
+          "logging",
+          "asyncio",
+          "time",
+          "psutil",
+          "typing",
+          "datetime",
+          "json",
+          "pathlib",
+          "dataclasses",
+          "collections"
+        ],
+        "classes": [
+          {
+            "name": "SystemMetrics",
+            "lineno": 15,
+            "end_lineno": 23,
+            "methods": []
+          },
+          {
+            "name": "ApplicationMetrics",
+            "lineno": 26,
+            "end_lineno": 34,
+            "methods": []
+          },
+          {
+            "name": "PerformanceMonitor",
+            "lineno": 36,
+            "end_lineno": 233,
+            "methods": [
+              "__init__",
+              "record_request",
+              "record_session",
+              "get_current_metrics"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_performance_monitor",
+            "lineno": 238,
+            "end_lineno": 243
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 12
+          },
+          {
+            "name": "_performance_monitor",
+            "lineno": 236
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "class_split",
+          "name": "systemmetrics.py",
+          "content": "Extract SystemMetrics class",
+          "line_range": [
+            15,
+            23
+          ],
+          "includes": [
+            "SystemMetrics"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "applicationmetrics.py",
+          "content": "Extract ApplicationMetrics class",
+          "line_range": [
+            26,
+            34
+          ],
+          "includes": [
+            "ApplicationMetrics"
+          ]
+        },
+        {
+          "type": "class_split",
+          "name": "performancemonitor.py",
+          "content": "Extract PerformanceMonitor class",
+          "line_range": [
+            36,
+            233
+          ],
+          "includes": [
+            "PerformanceMonitor"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./interfaces/web/router.py",
+      "lines": 250,
+      "analysis": {
+        "imports": [
+          "os",
+          "fastapi",
+          "fastapi.responses",
+          "starlette.staticfiles",
+          "sqlalchemy.orm",
+          "typing",
+          "core.database",
+          "core.security",
+          "modules.web_search.engine",
+          "modules.frontend_ui.router",
+          "schemas"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "router",
+            "lineno": 20
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/llm_engine/core_engine.py",
+      "lines": 241,
+      "analysis": {
+        "imports": [
+          "typing",
+          "asyncio",
+          "datetime",
+          "logging",
+          "openai",
+          "torch",
+          "openai",
+          "core.config",
+          "core.database",
+          "schemas",
+          "os",
+          "json"
+        ],
+        "classes": [
+          {
+            "name": "CoreLLMEngine",
+            "lineno": 15,
+            "end_lineno": 241,
+            "methods": [
+              "__init__",
+              "_get_openai_api_key",
+              "_setup_openai",
+              "_format_messages_for_local_model",
+              "is_openai_available"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 13
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/image_module/processor.py",
+      "lines": 237,
+      "analysis": {
+        "imports": [
+          "os",
+          "cv2",
+          "numpy",
+          "PIL",
+          "typing",
+          "datetime",
+          "pathlib",
+          "logging",
+          "ultralytics",
+          "torch",
+          "core.config"
+        ],
+        "classes": [
+          {
+            "name": "ImageProcessor",
+            "lineno": 15,
+            "end_lineno": 227,
+            "methods": [
+              "__init__",
+              "_get_dominant_colors"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_image_processor",
+            "lineno": 232,
+            "end_lineno": 237
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 13
+          },
+          {
+            "name": "_image_processor",
+            "lineno": 230
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/llm_engine/model_manager.py",
+      "lines": 237,
+      "analysis": {
+        "imports": [
+          "typing",
+          "os",
+          "pathlib",
+          "logging",
+          "torch",
+          "transformers",
+          "core.config",
+          "psutil",
+          "transformers"
+        ],
+        "classes": [
+          {
+            "name": "ModelManager",
+            "lineno": 12,
+            "end_lineno": 237,
+            "methods": [
+              "__init__",
+              "load_model",
+              "unload_model",
+              "switch_model",
+              "get_model",
+              "get_tokenizer",
+              "list_loaded_models",
+              "get_model_info",
+              "optimize_memory",
+              "get_memory_usage",
+              "check_model_compatibility"
+            ]
+          }
+        ],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 10
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./interfaces/admin/system.py",
+      "lines": 228,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "sqlalchemy.orm",
+          "datetime",
+          "psutil",
+          "os",
+          "logging",
+          "pathlib",
+          "core.database",
+          "core.security",
+          "schemas",
+          "modules.memory.memory_manager",
+          "modules.plugin_system.manager",
+          "modules.llm_engine.engine"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 19
+          },
+          {
+            "name": "router",
+            "lineno": 20
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/analytics/lineage_tracker.py",
+      "lines": 219,
+      "analysis": {
+        "imports": [
+          "logging",
+          "json",
+          "uuid",
+          "typing",
+          "datetime",
+          "dataclasses",
+          "sqlalchemy.orm",
+          "core.database",
+          "lineage_models",
+          "lineage_graph",
+          "lineage_validator"
+        ],
+        "classes": [
+          {
+            "name": "LineageTracker",
+            "lineno": 15,
+            "end_lineno": 209,
+            "methods": [
+              "__init__",
+              "start_trace",
+              "add_source",
+              "add_reasoning_step",
+              "add_metadata",
+              "finalize_trace",
+              "get_trace_summary",
+              "get_detailed_lineage",
+              "find_traces_by_source",
+              "validate_lineage",
+              "export_lineage",
+              "_save_trace",
+              "_load_trace"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_lineage_tracker",
+            "lineno": 214,
+            "end_lineno": 219
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 13
+          },
+          {
+            "name": "_lineage_tracker",
+            "lineno": 212
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./interfaces/admin/router.py",
+      "lines": 212,
+      "analysis": {
+        "imports": [
+          "fastapi",
+          "fastapi.responses",
+          "sqlalchemy.orm",
+          "typing",
+          "datetime",
+          "psutil",
+          "os",
+          "json",
+          "logging",
+          "pathlib",
+          "zipfile",
+          "tempfile",
+          "hashlib",
+          "secrets",
+          "core.database",
+          "core.security",
+          "modules.analytics_reporting.analytics",
+          "modules.plugin_system.manager",
+          "schemas",
+          "",
+          "core.database",
+          "datetime",
+          "core.database",
+          "datetime",
+          "core.database",
+          "datetime"
+        ],
+        "classes": [],
+        "functions": [],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 54
+          },
+          {
+            "name": "router",
+            "lineno": 55
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    },
+    {
+      "path": "./modules/llm_engine/engine.py",
+      "lines": 209,
+      "analysis": {
+        "imports": [
+          "typing",
+          "datetime",
+          "logging",
+          "sqlalchemy.orm",
+          "core.config",
+          "core.database",
+          "core_engine",
+          "model_manager",
+          "memory_integration",
+          "statistics",
+          "schemas"
+        ],
+        "classes": [
+          {
+            "name": "LLMEngine",
+            "lineno": 16,
+            "end_lineno": 203,
+            "methods": [
+              "__init__",
+              "switch_model",
+              "get_stats",
+              "get_detailed_stats",
+              "get_loaded_models",
+              "get_model_info",
+              "enable_memory",
+              "disable_memory",
+              "is_memory_enabled",
+              "optimize_memory",
+              "get_memory_usage",
+              "check_model_compatibility",
+              "reset_statistics",
+              "export_stats",
+              "import_stats"
+            ]
+          }
+        ],
+        "functions": [
+          {
+            "name": "get_llm_engine",
+            "lineno": 206,
+            "end_lineno": 209
+          }
+        ],
+        "constants": [
+          {
+            "name": "logger",
+            "lineno": 14
+          }
+        ],
+        "other": []
+      },
+      "suggestions": [
+        {
+          "type": "generic_split",
+          "name": "split_needed",
+          "content": "File needs manual refactoring - too complex for automatic splitting",
+          "suggestions": [
+            "Consider splitting by functionality",
+            "Extract utility functions",
+            "Separate data models from business logic",
+            "Move configuration to separate file"
+          ]
+        }
+      ],
+      "priority": "low"
+    }
+  ],
+  "summary": {
+    "high_priority_files": 3,
+    "medium_priority_files": 7,
+    "low_priority_files": 14,
+    "avg_lines_per_large_file": 304.0416666666667,
+    "refactoring_needed": true
+  }
+}

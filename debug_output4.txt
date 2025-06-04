@@ -1,0 +1,33 @@
+=== Environment Variables Before Config ===
+Traceback (most recent call last):
+  File "/home/chris-litkei/projects/axis/debug_config.py", line 14, in <module>
+    from core.config import settings
+  File "/home/chris-litkei/projects/axis/core/config.py", line 150, in <module>
+    settings = Settings.load_from_yaml("config.yaml")
+  File "/home/chris-litkei/projects/axis/core/config.py", line 138, in load_from_yaml
+    return cls()
+  File "/home/chris-litkei/projects/axis/core/config.py", line 81, in __init__
+    super().__init__(**kwargs)
+  File "/home/chris-litkei/venvs/axis/lib/python3.10/site-packages/pydantic_settings/main.py", line 176, in __init__
+    super().__init__(
+  File "/home/chris-litkei/venvs/axis/lib/python3.10/site-packages/pydantic/main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 6 validation errors for Settings
+llm
+  Input should be a valid dictionary or instance of LLMConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+memory
+  Input should be a valid dictionary or instance of MemoryConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+security
+  Input should be a valid dictionary or instance of SecurityConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+audio
+  Input should be a valid dictionary or instance of AudioConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+image
+  Input should be a valid dictionary or instance of ImageConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type
+performance
+  Input should be a valid dictionary or instance of PerformanceConfig [type=model_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.11/v/model_type

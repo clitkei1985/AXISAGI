@@ -1,0 +1,24 @@
+2025-06-04 10:18:38.973937: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-04 10:18:38.998430: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-06-04 10:18:39.670245: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+/home/chris-litkei/venvs/axis/lib/python3.10/site-packages/huggingface_hub/file_download.py:943: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+No OpenAI API key found
+=== Environment Variables Before Config ===
+
+=== Environment Variables After Config ===
+LLM_OPENAI_API_KEY: sk-proj-6bvIgXmpXo_PpOxx2R4BOX...
+LLM_USE_OPENAI_FALLBACK: True...
+LLM_MAX_TOKENS: 2048...
+LLM_TEMPERATURE: 0.7...
+LLM_MODEL_NAME: gpt-4...
+
+=== Configuration Debug ===
+OpenAI API Key configured: False
+No API key found
+Model name: gpt-4
+Use OpenAI fallback: True
+Local model path: None
+LLM Engine OpenAI client: False
+Local models loaded: []

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axis AI - Reasoning Graph</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/force-graph"></script>
+    <link rel="stylesheet" href="/static/css/reasoning_graph.css">
+</head>
+<body>
+    <div class="reasoning-container">
+        <div id="reasoning-graph"></div>
+        
+        <div class="control-panel">
+            <h3>🧠 Reasoning Controls</h3>
+            
+            <div class="control-group">
+                <label for="trace-select">Select Trace:</label>
+                <select id="trace-select">
+                    <option value="">Choose a reasoning trace...</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="layout-type">Layout:</label>
+                <select id="layout-type">
+                    <option value="force">Force Directed</option>
+                    <option value="hierarchical">Hierarchical</option>
+                    <option value="circular">Circular</option>
+                    <option value="tree">Tree</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="node-size">Node Size:</label>
+                <input type="range" id="node-size" min="5" max="50" value="20">
+            </div>
+            
+            <div class="control-group">
+                <label for="link-distance">Link Distance:</label>
+                <input type="range" id="link-distance" min="50" max="300" value="150">
+            </div>
+            
+            <div style="margin-top: 15px;">
+                <button class="btn" onclick="playReasoningAnimation()">▶️ Play</button>
+                <button class="btn" onclick="pauseAnimation()">⏸️ Pause</button>
+                <button class="btn" onclick="resetGraph()">🔄 Reset</button>
+            </div>
+        </div>
+        
+        <div class="stats-panel">
+            <h3>📊 Reasoning Stats</h3>
+            <div class="stat-item">
+                <span>Total Nodes:</span>
+                <span id="total-nodes">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Sources:</span>
+                <span id="source-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Reasoning Steps:</span>
+                <span id="reasoning-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span>Confidence Avg:</span>
+                <span id="confidence-avg">0%</span>
+            </div>
+            <div class="stat-item">
+                <span>Processing Time:</span>
+                <span id="processing-time">0ms</span>
+            </div>
+        </div>
+        
+        <div class="node-info" id="node-info">
+            <h4 id="node-title">Node Information</h4>
+            <p id="node-description"></p>
+            <div id="node-metadata"></div>
+        </div>
+        
+        <div class="timeline" id="timeline">
+            <h4>⏱️ Reasoning Timeline</h4>
+            <div id="timeline-chart"></div>
+        </div>
+        
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <div>Loading reasoning graph...</div>
+        </div>
+    </div>
+
+    <script src="/static/js/reasoning_graph.js"></script>
+</body>
+</html> 

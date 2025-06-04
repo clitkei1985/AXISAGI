@@ -1,0 +1,7 @@
+axis_env/
+*.pyc
+pycache/
+*.db
+*.log
+*.index
+models/

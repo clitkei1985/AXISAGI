@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Axis AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar-item:hover {
+            background: rgba(79, 70, 229, 0.1);
+            border-left: 4px solid #4f46e5;
+        }
+        .sidebar-item.active {
+            background: rgba(79, 70, 229, 0.1);
+            border-left: 4px solid #4f46e5;
+            color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
+                <span class="ml-4 px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">Administrator</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="refreshDashboard()" class="text-gray-600 hover:text-indigo-600">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <a href="/" class="text-indigo-600 hover:text-indigo-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to App
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg min-h-screen">
+            <nav class="mt-6">
+                <div class="px-4 mb-6">
+                    <h2 class="text-lg font-semibold text-gray-800">System Management</h2>
+                </div>
+                <ul class="space-y-1">
+                    <li>
+                        <button onclick="showSection('overview')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-tachometer-alt mr-3"></i>Overview
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('users')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-users mr-3"></i>User Management
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('memory')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-brain mr-3"></i>Memory Database
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('plugins')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-puzzle-piece mr-3"></i>Plugin Management
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('analytics')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-chart-bar mr-3"></i>Analytics
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('security')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-shield-alt mr-3"></i>Security & Audit
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('settings')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-cog mr-3"></i>System Settings
+                        </button>
+                    </li>
+                    <li>
+                        <button onclick="showSection('logs')" class="sidebar-item w-full text-left px-6 py-3 text-gray-700 hover:bg-gray-50 flex items-center">
+                            <i class="fas fa-file-alt mr-3"></i>System Logs
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <!-- Overview Section -->
+            <div id="overviewSection" class="admin-section">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">System Overview</h2>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Total Users</p>
+                                <p id="totalUsers" class="text-3xl font-bold text-indigo-600">--</p>
+                            </div>
+                            <i class="fas fa-users text-3xl text-indigo-400"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Active Sessions</p>
+                                <p id="activeSessions" class="text-3xl font-bold text-green-600">--</p>
+                            </div>
+                            <i class="fas fa-comments text-3xl text-green-400"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">Total Memories</p>
+                                <p id="totalMemoriesAdmin" class="text-3xl font-bold text-purple-600">--</p>
+                            </div>
+                            <i class="fas fa-brain text-3xl text-purple-400"></i>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-600">System Status</p>
+                                <p class="text-2xl font-bold text-green-600">Healthy</p>
+                            </div>
+                            <i class="fas fa-heartbeat text-3xl text-green-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Performance -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">System Performance</h3>
+                        <canvas id="performanceChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+                        <div id="recentAdminActivity" class="space-y-3">
+                            <!-- Activity items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div id="usersSection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">User Management</h2>
+                
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="px-6 py-4 border-b flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Users</h3>
+                        <div class="flex space-x-4">
+                            <input type="text" id="userSearch" placeholder="Search users..." 
+                                   class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <button onclick="searchUsers()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable" class="bg-white divide-y divide-gray-200">
+                                <!-- User rows will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Memory Section -->
+            <div id="memorySection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Memory Database Management</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Database Stats</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span>Total Memories:</span>
+                                <span id="dbTotalMemories" class="font-semibold">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Database Size:</span>
+                                <span id="dbSize" class="font-semibold">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Average Memory Size:</span>
+                                <span id="avgMemorySize" class="font-semibold">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Memory Actions</h3>
+                        <div class="space-y-3">
+                            <button onclick="backupMemories()" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-download mr-2"></i>Backup Database
+                            </button>
+                            <button onclick="reindexMemories()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+                                <i class="fas fa-refresh mr-2"></i>Re-index Memories
+                            </button>
+                            <button onclick="cleanupMemories()" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700">
+                                <i class="fas fa-trash mr-2"></i>Cleanup Old Data
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Memory Growth</h3>
+                        <canvas id="memoryGrowthChart" width="300" height="150"></canvas>
+                    </div>
+                </div>
+
+                <!-- Memory Browser -->
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="px-6 py-4 border-b">
+                        <h3 class="text-lg font-semibold">Memory Browser</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4 flex space-x-4">
+                            <input type="text" id="memorySearchAdmin" placeholder="Search memories..." 
+                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-lg">
+                            <select id="memoryUserFilter" class="px-4 py-2 border border-gray-300 rounded-lg">
+                                <option value="">All Users</option>
+                            </select>
+                            <button onclick="searchMemoriesAdmin()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
+                                Search
+                            </button>
+                        </div>
+                        <div id="memoryBrowser" class="space-y-4 max-h-96 overflow-y-auto">
+                            <!-- Memory items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plugins Section -->
+            <div id="pluginsSection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Plugin Management</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Plugin Stats</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span>Total Plugins:</span>
+                                <span id="totalPlugins" class="font-semibold">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Active Plugins:</span>
+                                <span id="activePluginsCount" class="font-semibold text-green-600">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Disabled Plugins:</span>
+                                <span id="disabledPlugins" class="font-semibold text-red-600">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Plugin Actions</h3>
+                        <div class="space-y-3">
+                            <button onclick="loadAllPlugins()" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-sync mr-2"></i>Reload All Plugins
+                            </button>
+                            <input type="file" id="pluginUpload" accept=".py,.zip" class="hidden">
+                            <button onclick="document.getElementById('pluginUpload').click()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+                                <i class="fas fa-upload mr-2"></i>Upload Plugin
+                            </button>
+                            <button onclick="openPluginMarketplace()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">
+                                <i class="fas fa-store mr-2"></i>Plugin Marketplace
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Recent Plugin Activity</h3>
+                        <div id="pluginActivity" class="space-y-2 text-sm">
+                            <!-- Plugin activity will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plugin List -->
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="px-6 py-4 border-b">
+                        <h3 class="text-lg font-semibold">Installed Plugins</h3>
+                    </div>
+                    <div id="pluginList" class="p-6">
+                        <!-- Plugin items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analyticsSection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">System Analytics</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">User Activity</h3>
+                        <canvas id="userActivityChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Feature Usage</h3>
+                        <canvas id="featureUsageChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4">Generate Reports</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button onclick="generateReport('user_activity')" class="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700">
+                            User Activity Report
+                        </button>
+                        <button onclick="generateReport('system_performance')" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+                            Performance Report
+                        </button>
+                        <button onclick="generateReport('security_audit')" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700">
+                            Security Audit
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Section -->
+            <div id="securitySection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Security & Audit</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Security Status</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>Authentication:</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-sm rounded">Secure</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>SSL/TLS:</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-sm rounded">Enabled</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Rate Limiting:</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-sm rounded">Active</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Data Encryption:</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-sm rounded">Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Audit Log Summary</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span>Total Events (24h):</span>
+                                <span id="auditEvents24h" class="font-semibold">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Failed Logins:</span>
+                                <span id="failedLogins" class="font-semibold text-red-600">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Admin Actions:</span>
+                                <span id="adminActions" class="font-semibold">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Security Alerts:</span>
+                                <span id="securityAlerts" class="font-semibold text-yellow-600">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audit Logs -->
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="px-6 py-4 border-b">
+                        <h3 class="text-lg font-semibold">Recent Audit Logs</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Timestamp</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">User</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">IP Address</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody id="auditLogsTable" class="bg-white divide-y divide-gray-200">
+                                <!-- Audit log rows will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settingsSection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">System Settings</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">General Settings</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">System Name</label>
+                                <input type="text" id="systemName" value="Axis AI" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Max Users</label>
+                                <input type="number" id="maxUsers" value="1000" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Session Timeout (minutes)</label>
+                                <input type="number" id="sessionTimeout" value="60" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Max Memory per User (MB)</label>
+                                <input type="number" id="maxMemoryPerUser" value="100" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Security Settings</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-700">Enable Two-Factor Authentication</span>
+                                <input type="checkbox" id="enable2FA" class="h-5 w-5 text-indigo-600">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-700">Require Strong Passwords</span>
+                                <input type="checkbox" id="strongPasswords" checked class="h-5 w-5 text-indigo-600">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-700">Enable Rate Limiting</span>
+                                <input type="checkbox" id="rateLimiting" checked class="h-5 w-5 text-indigo-600">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-medium text-gray-700">Log All API Calls</span>
+                                <input type="checkbox" id="logAPICalls" checked class="h-5 w-5 text-indigo-600">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-lg font-semibold mb-4">Performance Settings</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Max Concurrent Requests</label>
+                                <input type="number" id="maxRequests" value="100" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Cache TTL (seconds)</label>
+                                <input type="number" id="cacheTTL" value="300" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button onclick="saveSettings()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
+                            Save Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Section -->
+            <div id="logsSection" class="admin-section hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">System Logs</h2>
+                
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="px-6 py-4 border-b flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">Live System Console</h3>
+                        <div class="flex space-x-4">
+                            <select id="logLevel" class="px-3 py-2 border border-gray-300 rounded-lg">
+                                <option value="all">All Levels</option>
+                                <option value="error">Error</option>
+                                <option value="warning">Warning</option>
+                                <option value="info">Info</option>
+                                <option value="debug">Debug</option>
+                            </select>
+                            <button onclick="clearLogs()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                                Clear Logs
+                            </button>
+                            <button onclick="exportLogs()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                Export Logs
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div id="systemLogs" class="bg-black text-green-400 font-mono text-sm p-4 rounded-lg h-96 overflow-y-auto">
+                            <!-- Live logs will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 flex items-center space-x-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <span class="text-lg">Processing...</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Axis AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4">
+        <!-- Login Form -->
+        <div class="glass-effect rounded-2xl p-8 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="mx-auto w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-robot text-2xl text-indigo-600"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-2">Axis AI</h1>
+                <p class="text-indigo-100">Your intelligent assistant with persistent memory</p>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" id="loginEmail" required
+                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                           placeholder="Enter your email">
+                </div>
+                
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="loginPassword" required
+                               class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                               placeholder="Enter your password">
+                        <button type="button" onclick="togglePassword('loginPassword')" 
+                                class="absolute right-3 top-3 text-indigo-200 hover:text-white">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center text-indigo-200">
+                        <input type="checkbox" id="rememberMe" class="mr-2 rounded">
+                        <span class="text-sm">Remember me</span>
+                    </label>
+                    <a href="#" class="text-sm text-indigo-200 hover:text-white">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <button onclick="login()" 
+                        class="w-full bg-white text-indigo-600 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-200">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+                </button>
+
+                <div class="text-center">
+                    <span class="text-indigo-200 text-sm">Don't have an account?</span>
+                    <button onclick="showRegister()" class="text-white text-sm font-semibold hover:underline ml-1">
+                        Sign up
+                    </button>
+                </div>
+            </div>
+
+            <!-- Register Tab -->
+            <div id="registerForm" class="space-y-6 hidden">
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-user mr-2"></i>Username
+                    </label>
+                    <input type="text" id="registerUsername" required
+                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                           placeholder="Choose a username">
+                </div>
+
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" id="registerEmail" required
+                           class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                           placeholder="Enter your email">
+                </div>
+                
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-lock mr-2"></i>Password
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="registerPassword" required
+                               class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                               placeholder="Create a password">
+                        <button type="button" onclick="togglePassword('registerPassword')" 
+                                class="absolute right-3 top-3 text-indigo-200 hover:text-white">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-white text-sm font-medium mb-2">
+                        <i class="fas fa-lock mr-2"></i>Confirm Password
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="confirmPassword" required
+                               class="w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                               placeholder="Confirm your password">
+                        <button type="button" onclick="togglePassword('confirmPassword')" 
+                                class="absolute right-3 top-3 text-indigo-200 hover:text-white">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="register()" 
+                        class="w-full bg-white text-indigo-600 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-200">
+                    <i class="fas fa-user-plus mr-2"></i>Create Account
+                </button>
+
+                <div class="text-center">
+                    <span class="text-indigo-200 text-sm">Already have an account?</span>
+                    <button onclick="showLogin()" class="text-white text-sm font-semibold hover:underline ml-1">
+                        Sign in
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Preview -->
+        <div class="mt-8 glass-effect rounded-2xl p-6">
+            <h3 class="text-white text-lg font-semibold mb-4 text-center">Why Choose Axis AI?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-brain mr-3 text-white"></i>
+                    <span>Persistent Memory</span>
+                </div>
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-code mr-3 text-white"></i>
+                    <span>Code Analysis</span>
+                </div>
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-microphone mr-3 text-white"></i>
+                    <span>Voice Recognition</span>
+                </div>
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-chart-bar mr-3 text-white"></i>
+                    <span>Advanced Analytics</span>
+                </div>
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-puzzle-piece mr-3 text-white"></i>
+                    <span>Plugin System</span>
+                </div>
+                <div class="flex items-center text-indigo-100">
+                    <i class="fas fa-shield-alt mr-3 text-white"></i>
+                    <span>Enterprise Security</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 flex items-center space-x-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <span class="text-lg">Processing...</span>
+        </div>
+    </div>
+
+    <script>
+        function showRegister() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerForm').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.target;
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            console.log('Starting login process for:', email);
+            
+            if (!email || !password) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                console.log('Making login request...');
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+                });
+
+                const data = await response.json();
+                console.log('Login response:', response.status, data);
+
+                if (response.ok) {
+                    console.log('Storing token:', data.access_token);
+                    localStorage.setItem('token', data.access_token);
+                    showNotification('Login successful!', 'success');
+                    console.log('Redirecting to main page in 1 second...');
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1000);
+                } else {
+                    console.log('Login failed:', data.detail);
+                    showNotification(data.detail || 'Login failed', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function register() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!username || !email || !password || !confirmPassword) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+
+            if (password.length < 8) {
+                showNotification('Password must be at least 8 characters', 'error');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showNotification('Registration successful! Please log in.', 'success');
+                    showLogin();
+                } else {
+                    showNotification(data.detail || 'Registration failed', 'error');
+                }
+            } catch (error) {
+                showNotification('Network error. Please try again.', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+                type === 'success' ? 'bg-green-500' :
+                type === 'error' ? 'bg-red-500' :
+                'bg-blue-500'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Auto-focus first input
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('loginEmail').focus();
+        });
+
+        // Handle Enter key
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                if (!document.getElementById('registerForm').classList.contains('hidden')) {
+                    register();
+                } else {
+                    login();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

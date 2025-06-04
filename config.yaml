@@ -1,0 +1,219 @@
+ai_enhancement:
+  auto_training_generation: true
+  causal_reasoning: true
+  cross_domain_learning: true
+  domain_based_llm_switching: true
+  multi_agent_collaboration: true
+  persistent_world_model: true
+  reflection_validation: true
+  role_persona_switching: true
+  self_debugging: true
+  temporal_awareness: true
+  visual_reasoning_graph: true
+app_name: Axis AI
+audio:
+  adaptive_processing: true
+  bpm_detection: true
+  chord_extraction: true
+  emotion_detection: true
+  lyric_extraction: true
+  max_audio_length: 300
+  sample_rate: 16000
+  text_to_speech: true
+  voice_latency_threshold: 300
+  voice_recognition: true
+  voice_tone_adjustment: true
+  whisper_model: base
+base_url: http://localhost:8000
+cache:
+  max_size: 1000
+  ttl: 3600
+  type: memory
+database:
+  data_attribution: true
+  echo: false
+  lineage_tracking: true
+  max_overflow: 10
+  pool_recycle: 1800
+  pool_size: 20
+  pool_timeout: 30
+  real_time_inspection: true
+debug: true
+environment:
+  auto_dependency_install: true
+  cuda_detection: true
+  docker_support: true
+  hot_reload_enabled: true
+  live_dependency_resolution: true
+  live_module_reloading: true
+  native_support: true
+  venv_support: true
+host: 0.0.0.0
+image:
+  image_analysis: true
+  image_generation: true
+  max_image_size: 4096
+  supported_formats:
+  - jpg
+  - png
+  - webp
+  yolo_model_path: models/yolo
+  yolo_parsing: true
+llm:
+  agents:
+    analyst: meta-llama/CodeLlama-13b-Python-hf
+    coder: meta-llama/CodeLlama-13b-hf
+    creative: gpt-4
+    researcher: meta-llama/CodeLlama-13b-Instruct-hf
+  auto_fine_tune: true
+  auto_load_offline: true
+  base_model: meta-llama/CodeLlama-13b-hf
+  code_llama:
+    context_length: 16384
+    max_memory_gb: 12
+    model_variant: code-llama-13b
+    prefer_for_coding: true
+    quantization: 4bit
+  context_window: 16384
+  default_model: code-llama-13b
+  fallback_model: gpt-3.5-turbo
+  fallback_models:
+  - meta-llama/CodeLlama-13b-Instruct-hf
+  - meta-llama/CodeLlama-13b-Python-hf
+  - gpt-4
+  fine_tune_interval_hours: 24
+  gpu_memory_limit: 0.8
+  interaction_dataset_path: data/interactions
+  knowledge_growth_tracking: true
+  learning_enabled: true
+  local_model_path: /home/chris-litkei/projects/axis/models/CodeLlama-13b-hf
+  low_cpu_mem_usage: true
+  max_tokens: 2048
+  model_name: CodeLlama-13b-hf
+  openai_api_key: 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
+  prefer_local_models: true
+  temperature: 0.1
+  torch_compile: true
+  use_cache: true
+  use_openai_fallback: true
+memory:
+  cross_session_memory: true
+  embedding_model: all-MiniLM-L6-v2
+  encryption_key: ''
+  long_term_retention: true
+  max_memory_items: 100000
+  memory_cleanup_interval: 3600
+  memory_decay_enabled: true
+  memory_growth_tracking: true
+  memory_importance_scoring: true
+  memory_summarization: true
+  memory_tagging: true
+  nonlinear_memory: true
+  prioritization:
+    frequency_weight: 0.3
+    importance_weight: 0.3
+    recency_weight: 0.4
+  sql_db_url: sqlite:///db/memory.db
+  vector_db_path: db/vector
+monitoring:
+  enabled: true
+  gpu_monitoring: true
+  health_check_interval: 60
+  log_file: logs/axis.log
+  log_level: INFO
+  metrics_enabled: true
+  prometheus_port: 9090
+  real_time_console: true
+  system_load_tracking: true
+  verbose_backend_logging: true
+performance:
+  auto_optimization: true
+  batch_size: 32
+  cache_size: 1024
+  cuda_enabled: true
+  gpu_acceleration: true
+  max_workers: 4
+  memory_cleanup: true
+  performance_tracking: true
+  resource_monitoring: true
+plugins:
+  admin_rule_control: true
+  allowed_hosts:
+  - localhost
+  - 127.0.0.1
+  auto_generation: true
+  auto_install: false
+  enabled: true
+  plugin_dir: plugins
+  plugin_marketplace: true
+  rule_modification_protection: true
+  rules_governance: true
+  sandbox_mode: true
+  sandbox_testing: true
+  user_approval_required: true
+port: 8000
+reliability:
+  error_recovery: true
+  failover_chains: true
+  hot_module_swapping: true
+  minimal_fallback_mode: true
+  self_correction: true
+security:
+  access_token_expire_minutes: 30
+  admin_action_logging: true
+  algorithm: HS256
+  audit_trail: true
+  encryption_at_rest: true
+  live_decryption_only: true
+  password_min_length: 8
+  privacy_zones:
+    private: true
+    public: true
+    shared: true
+  refresh_token_expire_days: 7
+  secret_key: ''
+  user_access_monitoring: true
+uploads:
+  allowed_extensions:
+  - .txt
+  - .pdf
+  - .doc
+  - .docx
+  - .csv
+  - .json
+  - .jpg
+  - .jpeg
+  - .png
+  - .webp
+  - .mp3
+  - .wav
+  - .ogg
+  - .mp4
+  - .py
+  - .js
+  - .cpp
+  - .java
+  auto_indexing: true
+  dataset_processing: true
+  knowledge_extraction: true
+  max_file_size: 100
+  upload_dir: uploads
+web:
+  chain_of_thought_display: true
+  copilot_layout: true
+  enable_code_highlighting: true
+  enable_markdown: true
+  enable_math_rendering: true
+  file_versioning: true
+  integrated_editor: true
+  max_chat_history: 1000
+  project_organization: true
+  session_timeout: 3600
+  theme: dark
+  visual_reasoning: true
+web_search:
+  autonomous_browsing: true
+  content_extraction: true
+  enabled: true
+  real_time_plugin_browsing: true
+  source_classification: true

@@ -1,0 +1,213 @@
+1.	Overcome short-term memory limitations
+	2.	Retain long-term context across sessions
+	3.	Dynamically track evolving user goals
+	4.	Modular, scalable memory system
+	5.	Nonlinear project and goal handling
+	6.	Reduce repetition via memory recall
+	7.	User-editable memory (view/edit/delete)
+	8.	Vector-embedded memory storage
+	9.	Timestamped, tagged, summarized memory
+	10.	Memory-aware chat context
+	11.	Alternate approach branching
+	12.	Pin/delete memories
+	13.	Multimodal memory (files/images/etc.)
+	14.	Memory DB schema inspection
+	15.	Memory by dataset/user/source
+	16.	Track memory growth
+	17.	Auto-taggable knowledge memory
+	18.	Memory export/import
+	19.	Secure data backups
+	20.	Admin control of memory DB
+	21.	Re-index memory periodically
+	22.	Memory corruption detection
+	23.	Auto-data chunking
+	24.	Semantic memory search
+	25.	Access permissions per memory
+	26.	Full audit trail of actions
+	27.	Memory decay with pinning
+	28.	Auto-retraining from logs
+	29.	Track learning/memory reports
+	30.	Archive old sessions/data
+	31.	Summarize weekly memory growth
+	32.	Confidence scoring on answers
+	33.	Mode switching without reset
+	34.	Maintain time/date awareness
+	35.	Reflect on beliefs/goals
+	36.	Web-based frontend interface
+	37.	Persistent/resumable sessions
+	38.	Interactive chat + memory UI
+	39.	Distinguish new topics from continuations
+	40.	Copilot-style UI layout
+	41.	Integrated code editor
+	42.	File versioning
+	43.	Session management
+	44.	Folder/project organization
+	45.	Chat-to-project binding
+	46.	Per-chat session rules
+	47.	Rule obedience enforced
+	48.	Unified chat for all features
+	49.	Render responses inside chat
+	50.	Export full chat sessions
+	51.	Export individual chat messages
+	52.	Export code/files
+	53.	Visual diff for code/data
+	54.	Export tagged sessions
+	55.	JSON/CSV export support
+	56.	Modular plugin system
+	57.	Plugin-ready toolchain
+	58.	API gateway for external tools
+	59.	Visual project/session timeline
+	60.	Modular knowledge packs
+	61.	Scheduling and reminders
+	62.	Graph/image rendering support
+	63.	Timeline of logic/thoughts
+	64.	Chain-of-thought visual logic
+	65.	Generate counterarguments
+	66.	Tone/intent tracking
+	67.	Load/save full session states
+	68.	Prompt shaping based on session
+	69.	Explain its logic
+	70.	Flag/correct logic errors
+	71.	OpenAI + local LLM model support
+	72.	Use best open-source LLMs offline
+	73.	Use OpenAI offline if available
+	74.	Work offline from memory
+	75.	Online improves intelligence, not required
+	76.	Learns from every interaction
+	77.	Autonomous research ability
+	78.	Logical reasoning capability
+	79.	Answer “Where did I learn this?”
+	80.	Detect emotion/tone
+	81.	Detect urgency
+	82.	Build knowledge graphs
+	83.	Match Copilot’s coding intelligence
+	84.	Generate counterarguments
+	85.	Break down tasks automatically
+	86.	Confidence scoring
+	87.	AI honesty module
+	88.	Never gaslight or evade
+	89.	Respond clearly when it cannot fulfill a task
+	90.	Grow smarter forever
+	91.	Retain all new knowledge
+	92.	Academic writing generation
+	93.	QLoRA fine-tuning from feedback
+	94.	Multiple specialized AI agents
+	95.	Chain-of-thought visual logic
+	96.	Self-modifiable rule system
+	97.	Self-evolving architecture
+	98.	Bootstrapped enough to finish itself
+	99.	PDF document analysis
+	100.	Audio file analysis
+	101.	Upload and analyze music
+	102.	Audio: BPM/chords/lyric extraction
+	103.	Upload/fix code with auto-correction
+	104.	Upload books/PDFs/manuals
+	105.	Upload structured datasets (Planck, etc.)
+	106.	Learn from uploads
+	107.	Index knowledge from docs
+	108.	Upload open-source coding datasets
+	109.	Run equations on datasets
+	110.	Auto-generate unit tests
+	111.	JSON/CSV export
+	112.	Visual diff of data/code
+	113.	Save corrections to fine-tuning buffer
+	114.	Detect and explain coding errors
+	115.	File auto-refactor if >200 lines
+	116.	Project-wide code analysis
+	117.	Create, split, revise files
+	118.	Code suggestion/explanation
+	119.	Secure version tracking
+	120.	Admin dashboard
+	121.	View/edit/delete memory
+	122.	Admin logs
+	123.	System load stats
+	124.	Admin action logging
+	125.	Change system behavior/settings
+	126.	View/sort user profiles
+	127.	Link memory to users/projects
+	128.	User sign-up/login
+	129.	Secure and auditable memory
+	130.	User permissions and quotas
+	131.	Environment detection
+	132.	Self-recovery/failsafe watchdog
+	133.	Audit trail of all actions
+	134.	Limit/inspect user memory access
+	135.	Real-time database inspection
+	136.	Modify/delete entries manually
+	137.	Attribute DB entries to correct users
+	138.	Voice recognition
+	139.	Text-to-speech
+	140.	Voice mic management
+	141.	Read-back session on request
+	142.	Image generation
+	143.	Image analysis
+	144.	YOLO-based image parsing
+	145.	Speech-to-text (Whisper)
+	146.	Emotion/tone detection in voice
+	147.	Voice latency < 300ms
+	148.	Audio structure recognition
+	149.	Music lyric extraction
+	150.	Adaptive audio processing
+	151.	Visual + audio rendering
+	152.	Generate audio from prompts
+	153.	Explain songs/tones
+	154.	Match pitch/rhythm
+	155.	Perform full web searches
+	156.	Analyze full websites
+	157.	HTML content extraction
+	158.	Scrape structured data
+	159.	Retrieve research papers
+	160.	Ingest content from URLs
+	161.	Classify online sources
+	162.	Autonomous browsing
+	163.	Extract factual claims from web
+	164.	Real-time plugin-based browsing
+	165.	Auto-install dependencies
+	166.	Live dependency resolution
+	167.	Detect CUDA/driver versions
+	168.	Docker + native + venv support
+	169.	Smart installer
+	170.	Offline patching
+	171.	Detect system environment
+	172.	NVIDIA hardware acceleration
+	173.	Track CUDA/GPU performance
+	174.	Auto-balance resources
+	175.	Self-performance monitoring
+	176.	Adaptive optimization
+	177.	Memory/resource cleanup
+	178.	Offline mode fallback
+	179.	Web-based remote access (LAN)
+	180.	Fully open-source, no subscriptions
+	181.	AI must be capable of translating any language by learning from uploaded datasets
+	182.	AI must be capable of learning from any and all information it is provided
+	183.	Admin page must have full, real-time verbose console of backend operations
+	184.	Self-debugging engine to monitor/fix outputs before replying
+	185.	Causal reasoning engine for cause-effect understanding
+	186.	Multi-agent collaboration mode (internal experts)
+	187.	Reflection layer to validate answers pre-response
+	188.	Multi-scale memory prioritization (frequency, recency, importance)
+	189.	Interactive fine-tuning UI for user feedback control
+	190.	Cross-domain learning detection (e.g., physics + music)
+	191.	Auto-generate training sets from internal behavior
+	192.	Live module reloading without reboot
+	193.	Built-in LLM switching based on task domain
+	194.	Local plugin marketplace and sandboxing
+	195.	Failover LLM chains for redundancy
+	196.	Full data lineage on every answer
+	197.	Granular privacy zones (private/shared/public memory)
+	198.	Encryption-at-rest with live-only decryption in RAM
+	199.	Emotion-responsive voice tone adjustment
+	200.	Real-time visual reasoning/thought graph
+	201.	Role/persona switching (e.g. teacher, coder, artist)
+	202.	Persistent world model (culture, geography, events)
+	203.	Full temporal awareness across sessions and tasks
+	204.	AI must be intelligent enough to build its own plugins based on user request
+	205.	AI must auto-implement plugins it generates and integrate them
+	206.	All AI-generated plugins must be sandbox tested before deployment
+	207.	Plugins must require user approval before being deployed
+	208.	A global rules governance module must exist
+	209.	The AI must never override or modify its own rules under any condition
+	210.	Admin interface must allow viewing, editing, and locking all AI rules
+	211.	System must be robust to survive and self-correct from errors
+	212.	Plugins/modules may be added/removed without crashing the core
+	213.	Include fallback mode to run minimal functionality if core fails
