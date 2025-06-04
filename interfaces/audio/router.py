@@ -9,7 +9,7 @@ from pathlib import Path
 
 from core.database import get_db, User
 from core.security import get_current_active_user
-from modules.audio_voice.processor import get_audio_processor
+from modules.audio_voice import get_audio_processor
 from .schemas import (
     AudioProcessingConfig,
     TranscriptionResponse,

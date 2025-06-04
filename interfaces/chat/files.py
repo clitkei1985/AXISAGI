@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
 from sqlalchemy.orm import Session
 from core.database import get_db, Session as DBSession, User
 from core.security import get_current_active_user
-from modules.audio_voice.processor import get_audio_processor
+from modules.audio_voice import get_audio_processor
 from modules.image_module.processor import get_image_processor
 from .schemas import FileUploadResponse
 from pathlib import Path

@@ -15,6 +15,7 @@ from .schemas import (
     AdminActionResult,
     HealthCheckResponse
 )
+from modules.audio_voice import get_audio_processor
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -287,7 +288,6 @@ async def health_check(
         
         # Audio processing check
         try:
-            from modules.audio_voice.processor import get_audio_processor
             audio_processor = get_audio_processor()
             checks["audio_processing"] = {"status": "healthy", "models_loaded": 2}
         except Exception as e:

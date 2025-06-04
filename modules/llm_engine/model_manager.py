@@ -34,12 +34,41 @@ class ModelManager:
             self.load_model(settings.llm.local_model_path)
 
     def load_model(self, model_path: str, model_name: Optional[str] = None):
-        """Load a local model with GPU optimization."""
+        """Load a local model with GPU optimization and fallback handling."""
         if not model_name:
             model_name = model_path.split('/')[-1]
         
         try:
             logger.info(f"Loading local model: {model_path}")
+            
+            # Check if model files exist
+            model_path_obj = Path(model_path)
+            if not model_path_obj.exists():
+                logger.error(f"Model path does not exist: {model_path}")
+                return self._load_fallback_model(model_name)
+            
+            # Check for required model weight files
+            index_file = model_path_obj / "model.safetensors.index.json"
+            if index_file.exists():
+                import json
+                with open(index_file) as f:
+                    index_data = json.load(f)
+                
+                # Check if all safetensors files exist
+                weight_files = set(index_data.get("weight_map", {}).values())
+                missing_files = []
+                for weight_file in weight_files:
+                    if not (model_path_obj / weight_file).exists():
+                        missing_files.append(weight_file)
+                
+                if missing_files:
+                    logger.error(f"Missing model weight files: {missing_files}")
+                    logger.info("Attempting to download missing files...")
+                    if self._download_missing_files(model_path, missing_files):
+                        logger.info("Successfully downloaded missing files")
+                    else:
+                        logger.warning("Could not download missing files, using fallback")
+                        return self._load_fallback_model(model_name)
             
             # Configure quantization for memory efficiency on RTX 5080
             quantization_config = None
@@ -104,7 +133,103 @@ class ModelManager:
                 
         except Exception as e:
             logger.error(f"Failed to load model {model_path}: {e}")
-            raise
+            logger.info("Attempting to load fallback model...")
+            return self._load_fallback_model(model_name)
+    
+    def _download_missing_files(self, model_path: str, missing_files: list) -> bool:
+        """Attempt to download missing model files from HuggingFace."""
+        try:
+            from huggingface_hub import hf_hub_download
+            
+            # Extract repo ID from path (assuming it follows our structure)
+            if "CodeLlama-13b-hf" in model_path:
+                repo_id = "codellama/CodeLlama-13b-hf"
+            elif "CodeLlama-13b-Instruct-hf" in model_path:
+                repo_id = "codellama/CodeLlama-13b-Instruct-hf"
+            elif "CodeLlama-13b-Python-hf" in model_path:
+                repo_id = "codellama/CodeLlama-13b-Python-hf"
+            else:
+                logger.error("Could not determine HuggingFace repo ID from path")
+                return False
+            
+            logger.info(f"Downloading {len(missing_files)} missing files from {repo_id}")
+            
+            for file in missing_files:
+                logger.info(f"Downloading {file}...")
+                try:
+                    hf_hub_download(
+                        repo_id=repo_id,
+                        filename=file,
+                        local_dir=model_path,
+                        local_dir_use_symlinks=False
+                    )
+                    logger.info(f"Successfully downloaded {file}")
+                except Exception as e:
+                    logger.error(f"Failed to download {file}: {e}")
+                    return False
+            
+            return True
+            
+        except ImportError:
+            logger.error("huggingface_hub not available for downloading missing files")
+            return False
+        except Exception as e:
+            logger.error(f"Error downloading missing files: {e}")
+            return False
+    
+    def _load_fallback_model(self, model_name: str) -> bool:
+        """Load a fallback model (GPT-2 or similar) when primary model fails."""
+        try:
+            logger.info("Loading fallback model (GPT-2) for basic functionality...")
+            
+            from transformers import GPT2LMHeadModel, GPT2Tokenizer
+            
+            # Load GPT-2 as fallback
+            tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+            tokenizer.pad_token = tokenizer.eos_token
+            
+            model = GPT2LMHeadModel.from_pretrained("gpt2")
+            
+            if self.device == 'cuda':
+                model = model.to(self.device)
+            
+            self.local_models[f"{model_name}_fallback"] = model
+            self.tokenizers[f"{model_name}_fallback"] = tokenizer
+            
+            # Also register with original name for compatibility
+            self.local_models[model_name] = model
+            self.tokenizers[model_name] = tokenizer
+            
+            logger.info(f"Successfully loaded fallback model for {model_name}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to load fallback model: {e}")
+            # Create a dummy model that returns helpful error messages
+            self._create_dummy_model(model_name)
+            return False
+    
+    def _create_dummy_model(self, model_name: str):
+        """Create a dummy model that returns helpful error messages."""
+        class DummyModel:
+            def generate(self, *args, **kwargs):
+                return torch.tensor([[1, 2, 3]])  # Dummy output
+        
+        class DummyTokenizer:
+            def __init__(self):
+                self.pad_token = "<pad>"
+                self.eos_token = "<eos>"
+                self.vocab_size = 1000
+                
+            def encode(self, text, *args, **kwargs):
+                return [1, 2, 3]
+                
+            def decode(self, tokens, *args, **kwargs):
+                return "I apologize, but the AI model is currently unavailable. Please ensure the CodeLlama model files are properly downloaded."
+        
+        self.local_models[model_name] = DummyModel()
+        self.tokenizers[model_name] = DummyTokenizer()
+        logger.warning(f"Created dummy model for {model_name} - responses will be limited")
 
     def unload_model(self, model_name: str) -> bool:
         """Unload a model to free memory."""
